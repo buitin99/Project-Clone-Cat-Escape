@@ -29,8 +29,6 @@ public class FloatingJoystick : MonoBehaviour, IDragHandler, IPointerDownHandler
         } else {
             direction = Vector2.zero;
         }
-
-        // OnMove?.Invoke(direction);
     }
 
     public void OnPointerUp(PointerEventData eventData)
