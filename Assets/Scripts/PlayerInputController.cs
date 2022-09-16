@@ -6,17 +6,10 @@ public class PlayerInputController : MonoBehaviour
     public FloatingJoystick joystick;
     public float speed = 5f;
 
-    private bool isCheck;
-
-    
     private void Awake() 
     {
         _controller = GetComponent<CharacterController>();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        FieldOfView.onLose += CheckToWin;
     }
 
     private void FixedUpdate() {
@@ -24,18 +17,11 @@ public class PlayerInputController : MonoBehaviour
         {
             Move(joystick.direction);
         }
+
+        if (FieldOfView.isAddListenner)
+            FieldOfView.onLose -= CheckToWin;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        var check = FieldOfView.isWin ? isCheck = true : isCheck = false;
-        if (check)
-        {
-        //    CheckToWin();
-            Debug.Log("Win");
-        }
-    }
 
     public void Move(Vector2 dir)
     {
@@ -45,6 +31,6 @@ public class PlayerInputController : MonoBehaviour
 
     private void CheckToWin()
     {
-        Debug.Log("Win");
+       Debug.Log("Lose");
     }
 }

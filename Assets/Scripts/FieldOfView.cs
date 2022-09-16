@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +12,9 @@ public class FieldOfView : MonoBehaviour {
 	public LayerMask targetMask;
 	public LayerMask obstacleMask;
 
-	public static bool isWin;
+	public static event Action onLose;
+
+	public static bool isAddListenner;
 
 	[HideInInspector]
 	public List<Transform> visibleTargets = new List<Transform>();
@@ -75,22 +78,18 @@ public class FieldOfView : MonoBehaviour {
 					if (edge.pointA != Vector3.zero) {
 						viewPoints.Add (edge.pointA);
 
-						isWin = true;
+						onLose?.Invoke();
+						isAddListenner= true;
 					}
-					else if (isWin)
-						isWin = false;
-
+		
 					if (edge.pointB != Vector3.zero) {
 						viewPoints.Add (edge.pointB);
 						
-						isWin = true;
+						onLose?.Invoke();
+						isAddListenner= true;
 					}
-					else if (isWin)
-						isWin = false;
 				}
-
 			}
-
 
 			viewPoints.Add (newViewCast.point);
 			oldViewCast = newViewCast;
