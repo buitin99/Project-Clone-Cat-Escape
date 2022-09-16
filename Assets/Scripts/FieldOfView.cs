@@ -78,16 +78,14 @@ public class FieldOfView : MonoBehaviour {
 					if (edge.pointA != Vector3.zero) {
 						viewPoints.Add (edge.pointA);
 
-						onLose?.Invoke();
-						isAddListenner= true;
 					}
 		
 					if (edge.pointB != Vector3.zero) {
 						viewPoints.Add (edge.pointB);
 						
+					}
 						onLose?.Invoke();
 						isAddListenner= true;
-					}
 				}
 			}
 
